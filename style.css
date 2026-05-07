@@ -1,52 +1,77 @@
 :root {
-    --branco: #ffffff; 
-    --cinza-secundario: #333; 
-    --fundo: #121212; 
+    --branco: #ffffff;
+    --cinza-secundario: #333;
+    --fundo: #121212;
     --fundo-video: #000;
     --cor-texto: #901794;
 }
 
 body {
-    margin: 0; 
-    font-family: Arial; 
-    background-color: var(--branco); /* Depois ver com o desing a cor do fundo */
-    color: var(--cor-texto);    /*ver desing cor texto */
-    min-height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: flex-start; 
-    gap: 20px; 
-    padding: 40px 20px; 
+    margin: 0;
+    font-family: Arial;
+    background-color: var(--branco);
+    color: var(--cor-texto);
+    min-height: 100vh;
+    padding: 40px 20px;
+    padding-top: 80px; /* espaço pro logo fixo */
 }
 
-label,
-input {
-    width: 100%; 
-    max-width: 420px; 
-}
-
-label {
-    font-size: 1rem; 
-    margin-bottom: 8px; 
+.container {
+    display: flex;
+    flex-direction: row;       /* vídeo e conteúdo lado a lado */
+    align-items: flex-start;
+    gap: 40px;
 }
 
 #video-container {
-    width: 100%;
-    max-width: 420px; 
-    display: flex; 
-    justify-content: center; 
+    flex-shrink: 0;            /* não deixa o vídeo encolher */
+    width: 120px;
 }
 
 #video-square {
-    width: 100%; 
-    aspect-ratio: 1 / 1; 
+    width: 500px;
+    height: 800px;
+    aspect-ratio: 1 / 1;
     background-color: var(--fundo-video);
-    border-radius: 24px; 
-    border: 6px solid var(--cinza-secundario); 
-    display: flex; 
-    align-items: center; 
+    border-radius: 24px;
+    border: 6px solid var(--cinza-secundario);
+    display: flex;
+    align-items: center;
     justify-content: center;
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
-    overflow: hidden; 
+    overflow: hidden;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 50px;
+    padding-left: 350px;
+}
+
+.conteudo label,
+.conteudo input {
+    width: 100%;
+    max-width: 380px;
+}
+
+.conteudo label {
+    font-size: 1rem;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.input-grupo {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }
