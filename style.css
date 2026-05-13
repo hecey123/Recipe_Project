@@ -62,16 +62,37 @@ body {
     font-size: 1rem;
 }
 
-.logo {
+.logo-principal{
     width: 150px;
     height: auto;
     position: fixed;
     top: 0;
     left: 0;
 }
-
+.logo-persona{
+    width: 150px;
+    height: auto;
+    position: fixed;
+    display: flex;
+    justify-content: right;
+    top: 0;
+    right: 0;
+}
 .input-grupo {
     display: flex;
     flex-direction: row;
     gap: 8px;
+}
+.lista-css{
+    position: absolute;
+    display: flex;
+    margin-left: 650px;
+    margin-top: 50px;
+    width: 1200px;
+    height: 600px;
+    font-size: 20px;
+}
+/* ESCONDE A LISTA */
+#listagem{
+    display: none;
 }

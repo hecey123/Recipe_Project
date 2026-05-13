@@ -1,31 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast-Shop</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
-<header>
-    <img src="imgs/Logo-removebg-preview.png" class="logo" alt="Logo do site">
-</header>
+
 <body>
 
-</a>
-<div class="container">
-    <div id="video-container">   
-        <div id="video-square"></div>
-    </div>
+    <header>
+        <img src="imgs/Logo-removebg-preview.png" class="logo-principal" alt="Logo principal">
+        <img src="imgs/Persona-removebg-preview.png" class="logo-persona" alt="Logo persona">
+    </header>
+
+    <div class="container">
+
+        <div id="video-container">
+            <div id="video-square"></div>
+        </div>
 
         <div class="input-grupo">
-            <input type="url" id="video-url" name="video-url" placeholder="https://www..." required> 
-            <button class="i">Verificar Link</button>
-        </div>
-        <a href="pg_shopper.html">Pode ser útil</a>
-    </div>
-</div>
+            <input type="url"
+                   id="video-url"
+                   name="video-url"
+                   placeholder="https://www..."
+                   required>
 
-    <script src="Site.js"></script>
-    
+            <button id="mostrar-lista">
+                Clique aqui
+            </button>
+        </div>
+
+        <!-- LISTA ESCONDIDA -->
+        <select name="listagem"
+                id="listagem"
+                multiple
+                class="lista-css">
+
+            <optgroup label="INGREDIENTES:"></optgroup>
+
+            <option value="farinha">Farinha</option>
+            <option value="ovos">Ovos</option>
+            <option value="leite">Leite</option>
+            <option value="macarrao">Macarrão</option>
+
+        </select>
+
+        <a href="pg_shopper.html">
+            Pode ser útil
+        </a>
+
+    </div>
+
+    <script>
+
+        const botao = document.getElementById("mostrar-lista");
+        const lista = document.getElementById("listagem");
+
+        botao.addEventListener("click", function () {
+
+            if (lista.style.display === "block") {
+                lista.style.display = "none";
+            } else {
+                lista.style.display = "block";
+            }
+
+        });
+
+    </script>
+
 </body>
-</html> 
+
+</html>
