@@ -4,72 +4,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast-Shop</title>
-
+    <title>Fast-Shop - Gerador de Receitas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <img src="imgs/Logo-removebg-preview.png" class="logo-principal" alt="Logo principal">
-        <img src="imgs/Persona-removebg-preview.png" class="logo-persona" alt="Logo persona">
+  
+    <header class="header-top">
+        <img src="imgs/Logo-removebg-preview.png" class="logo-principal" alt="Logo Fast-Shop">
+        
+        
+        <nav class="menu-navegacao">
+            <a href="#inicio" class="nav-link ativo">Início</a>
+            <a href="#gerador" class="nav-link">Gerador</a>
+            <a href="#historico" class="nav-link">Histórico</a>
+            <a href="#perfil" class="nav-link">Perfil</a>
+        </nav>
+
+     
+        <img src="imgs/Persona-removebg-preview.png" class="logo-persona" alt="Avatar do usuário">
     </header>
 
-    <div class="container">
+    <main class="container-principal">
 
-        <div id="video-container">
-            <div id="video-square"></div>
+      
+        <div class="secao-video">
+            <div class="video-player">
+                <div class="video-placeholder">
+               
+                </div>
+            </div>
         </div>
 
-        <div class="input-grupo">
-            <input type="url"
-                   id="video-url"
-                   name="video-url"
-                   placeholder="https://www..."
-                   required>
+    
+        <div class="secao-direita">
 
-            <button id="mostrar-lista">
-                Clique aqui
-            </button>
+            <div class="url-input-area">
+                <input 
+                    type="url"
+                    id="video-url"
+                    class="input-url"
+                    placeholder="https://www.youtube.com/shorts/..."
+                    required>
+                
+                <button id="botao-verificar" class="botao-verificar">Verificar</button>
+            </div>
+
+            
+            <h2 class="titulo-ingredientes">Ingredientes necessários para a receita do vídeo analisado:</h2>
+
+            <textarea 
+                id="lista-ingredientes"
+                class="ingredientes-box"
+                placeholder="• Ingrediente 1
+• Ingrediente 2
+• Ingrediente 3"
+                readonly></textarea>
+
+            <!-- LINK ÚTIL -->
+            <a href="pg_shopper.html" class="link-util">Pode ser útil</a>
+
         </div>
 
-        <!-- LISTA ESCONDIDA -->
-        <select name="listagem"
-                id="listagem"
-                multiple
-                class="lista-css">
+    </main>
 
-            <optgroup label="INGREDIENTES:"></optgroup>
+    <section class="secao-checklist">
+        <h2 class="titulo-checklist">LISTAGEM DE ITENS/INGREDIENTES:</h2>
+        
+        <div class="tabela-ingredientes-wrapper">
+            <table class="tabela-ingredientes">
+                <tbody id="corpo-tabela">
+                   
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-            <option value="farinha">Farinha</option>
-            <option value="ovos">Ovos</option>
-            <option value="leite">Leite</option>
-            <option value="macarrao">Macarrão</option>
 
-        </select>
-
-        <a href="pg_shopper.html">
-            Pode ser útil
-        </a>
-
-    </div>
+    <footer class="rodape">
+        <p class="copyright">© 2026 - FastShop. Todos os direitos reservados.</p>
+        <div class="icones-contato">
+            <a href="#" class="icone-contato" title="Telefone">📞</a>
+            <a href="#" class="icone-contato" title="WhatsApp">💬</a>
+            <a href="#" class="icone-contato" title="Instagram">📷</a>
+        </div>
+    </footer>
 
     <script>
 
-        const botao = document.getElementById("mostrar-lista");
-        const lista = document.getElementById("listagem");
+        const botaoVerificar = document.getElementById("botao-verificar");
+        const inputUrl = document.getElementById("video-url");
+        const listaIngredientes = document.getElementById("lista-ingredientes");
+        const corpoTabela = document.getElementById("corpo-tabela");
 
-        botao.addEventListener("click", function () {
+    
+        const ingredientesLista = [
+            "Macarrão (spaghete, penne ou parafuso) - Massa",
+            "Carne bovina (patinho, acém ou alcatra em cubos ou moída) - Carne",
+            "Abobrinha - Legume",
+            "Cenoura - Legume",
+            "Pimentão (verde, vermelho ou amarelo) - Legume",
+            "Brócolis - Legume",
+            "Vagem - Legume",
+            "Tomate - Legume",
+            "Extrato de tomate ou molho pronto - Base de molho",
+            "Alho - Tempero",
+            "Cebola - Legume/Tempero",
+            "Orégano - Tempero",
+            "Manjericão (fresco ou seco) - Tempero",
+            "Louro (folha) - Tempero",
+            "Cheiro-verde (salsinha e cebolinha) - Tempero"
+        ];
 
-            if (lista.style.display === "block") {
-                lista.style.display = "none";
-            } else {
-                lista.style.display = "block";
-            }
-
+        window.addEventListener("load", function() {
+            preencherTabela(ingredientesLista);
+            
+       
+            const ingredientesTexto = ingredientesLista.map(ing => `• ${ing}`).join("\n");
+            listaIngredientes.value = ingredientesTexto;
         });
 
+
+        botaoVerificar.addEventListener("click", verificarVideo);
+
+        function verificarVideo() {
+            const url = inputUrl.value;
+            
+      
+            if (!url) {
+                alert("Por favor, insira uma URL válida!");
+                return;
+            }
+
+            // Preenche a caixa de texto
+            const ingredientesTexto = ingredientesLista.map(ing => `• ${ing}`).join("\n");
+            listaIngredientes.value = ingredientesTexto;
+
+   
+            preencherTabela(ingredientesLista);
+        }
+
+        function preencherTabela(ingredientes) {
+            
+            corpoTabela.innerHTML = "";
+
+            ingredientes.forEach((ingrediente, index) => {
+                const linha = document.createElement("tr");
+                
+                const celulaNome = document.createElement("td");
+                celulaNome.innerHTML = `<span class="ingrediente-nome">• ${ingrediente}</span>`;
+                
+                const celulaCheckbox = document.createElement("td");
+                celulaCheckbox.innerHTML = `
+                    <div class="checkbox-container">
+                        <div class="checkbox-custom desmarcado" data-index="${index}">✓</div>
+                        <span class="texto-checkbox">Possui o item?</span>
+                    </div>
+                `;
+                
+                linha.appendChild(celulaNome);
+                linha.appendChild(celulaCheckbox);
+                corpoTabela.appendChild(linha);
+            });
+
+      
+            adicionarEventosCheckbox();
+        }
+
+        function adicionarEventosCheckbox() {
+            const checkboxes = document.querySelectorAll(".checkbox-custom");
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("click", function() {
+                    // Alterna entre marcado e desmarcado
+                    if (this.classList.contains("marcado")) {
+                        this.classList.remove("marcado");
+                        this.classList.add("desmarcado");
+                    } else {
+                        this.classList.remove("desmarcado");
+                        this.classList.add("marcado");
+                    }
+                });
+            });
+        }
+
+        inputUrl.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                verificarVideo();
+            }
+        });
     </script>
 
 </body>
